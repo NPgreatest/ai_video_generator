@@ -3,6 +3,8 @@ video: 1.mp4
 output: outputtest.mp4
 bgmusic: FuneralMarch.mp3
 script: 1.txt
+bigtitle: 《码农丁真》
+smalltitle: 进程和线程的区别
 bgpic:
   - name: dingzhen.png
     begin: 0

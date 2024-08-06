@@ -24,6 +24,12 @@ class ConfigParser:
         """获取视频文件路径"""
         return self.config_data.get('video', None)
 
+    def get_bigtitle(self):
+        return self.config_data.get('bigtitle', None)
+
+    def get_smalltitle(self):
+        return self.config_data.get('smalltitle', None)
+
     def get_output_file(self):
         """获取输出文件路径"""
         return self.config_data.get('output', None)
