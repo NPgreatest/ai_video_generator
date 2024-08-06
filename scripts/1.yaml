@@ -1,0 +1,9 @@
+project: test
+video: 1.mp4
+output: outputtest.mp4
+bgmusic: FuneralMarch.mp3
+script: 1.txt
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999
