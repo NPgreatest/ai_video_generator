@@ -112,7 +112,7 @@ def generateVideo(config: ConfigParser) -> bool:
     # 循环处理每个音频文件和字幕
     round = 0
     for audio_path, subtitle in zip(audio_paths, script):
-        # if round == 2:
+        # if round == 3:
         #     break
         round += 1
         # 加载音频文件
@@ -120,7 +120,7 @@ def generateVideo(config: ConfigParser) -> bool:
         audio_duration = audio_clip.duration
 
         txt_clips = []
-        subtitle_clips = [subtitle[i:i+7] for i in range(0,len(subtitle),7)]
+        subtitle_clips = subtitle.split('\\\\')
         print(f'切分后的字幕片段为{subtitle_clips}')
         for i, subtitle_clip in enumerate(subtitle_clips):
             # 拼凑起来
@@ -147,11 +147,16 @@ def generateVideo(config: ConfigParser) -> bool:
                 image_clip = ImageClip(f'pic/{picName}').set_duration(audio_duration)
                 width, height = image_clip.size
                 resize_factor = 3 / 5
+                if 'factor' in picConfig:
+                    resize_factor = picConfig['factor']
                 new_width = int(width * resize_factor)
                 new_height = int(height * resize_factor)
                 image_clip = image_clip.resize((new_width, new_height))
-
-                image_clip = image_clip.set_position(("left", "bottom"))
+                # 默认是在左下角
+                if 'posx' not in picConfig or 'posy' not in picConfig:
+                    image_clip = image_clip.set_position(("left", "bottom"))
+                else:
+                    image_clip = image_clip.set_position((picConfig['posx'], picConfig['posy']))
                 video_subclip = CompositeVideoClip([video_subclip, image_clip])
 
         # 添加到最终视频列表中
@@ -172,7 +177,7 @@ def generateVideo(config: ConfigParser) -> bool:
         # 加载音频文件
         back_audio_clip = AudioFileClip(back_audio_path)
         back_audio_clip = back_audio_clip.set_duration(current_time)
-        back_audio_clip = back_audio_clip.volumex(0.3)
+        back_audio_clip = back_audio_clip.volumex(0.2)
         final_audio = CompositeAudioClip([final_video.audio, back_audio_clip])
         final_video = final_video.set_audio(final_audio)
 
@@ -192,7 +197,7 @@ curl --location 'http://127.0.0.1:9880?text=test&text_language=zh&cut_punc=.'
 """
 
 
-def genAudioandTitleFromAI(config: ConfigParser, port: int):
+def genAudioandTitleFromAI(config: ConfigParser, port: int, reGen : bool):
     output_name = config.get_project()
     scriptPath = config.get_script()
     scripts = read_txt_to_list(scriptPath)
@@ -208,7 +213,7 @@ def genAudioandTitleFromAI(config: ConfigParser, port: int):
             'speed' : '1.2'
         }
         # 跳过已经生成的内容
-        if os.path.exists(f'{output_audio}/{output_name}_{index + 1}.mp3'):
+        if os.path.exists(f'{output_audio}/{output_name}_{index + 1}.mp3') and not reGen:
             continue
 
         # 处理指令
@@ -219,6 +224,9 @@ def genAudioandTitleFromAI(config: ConfigParser, port: int):
                 shutil.copy(f'{output_audio}/{findMusic}', f"{output_audio}/{output_name}_{index + 1}.mp3")
                 print('复制成功')
                 continue
+
+        # 跳过换行符号
+        script.replace('\\\\','')
 
         # 发送请求
         response = requests.get(url, params=params)
@@ -233,10 +241,11 @@ def genAudioandTitleFromAI(config: ConfigParser, port: int):
         else:
             print(f"Failed to generate audio for script {index + 1}: {response.status_code}")
 
+reGen = True
 
-config = ConfigParser('scripts/1.yaml')
+config = ConfigParser('scripts/6e.yaml')
 genPic(config)
 
-genAudioandTitleFromAI(config,port)
+genAudioandTitleFromAI(config,port,reGen)
 output_video = generateVideo(config)
 print("Video saved to:", config.get_output_file())
