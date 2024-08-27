@@ -5,6 +5,7 @@ from moviepy.audio.AudioClip import CompositeAudioClip
 from moviepy.video.VideoClip import ImageClip
 
 from config import *
+from command_process import *
 import requests
 import shutil
 from moviepy.editor import VideoFileClip, AudioFileClip, concatenate_videoclips, CompositeVideoClip, TextClip
@@ -112,7 +113,7 @@ def generateVideo(config: ConfigParser) -> bool:
     # 循环处理每个音频文件和字幕
     round = 0
     for audio_path, subtitle in zip(audio_paths, script):
-        # if round == 3:
+        # if round == 8:
         #     break
         round += 1
         # 加载音频文件
@@ -120,6 +121,9 @@ def generateVideo(config: ConfigParser) -> bool:
         audio_duration = audio_clip.duration
 
         txt_clips = []
+        # 分离audio指令
+        subtitle = replace_command(subtitle,'audio',2)
+        # 切分文本
         subtitle_clips = subtitle.split('\\\\')
         print(f'切分后的字幕片段为{subtitle_clips}')
         for i, subtitle_clip in enumerate(subtitle_clips):
@@ -206,12 +210,7 @@ def genAudioandTitleFromAI(config: ConfigParser, port: int, reGen : bool):
     for index, script in enumerate(scripts):
         # 构建API请求URL
         url = f"http://127.0.0.1:{port}"
-        params = {
-            'text': script,
-            'text_language': 'zh',
-            'cut_punc': '。，',
-            'speed' : '1.2'
-        }
+
         # 跳过已经生成的内容
         if os.path.exists(f'{output_audio}/{output_name}_{index + 1}.mp3') and not reGen:
             continue
@@ -226,7 +225,15 @@ def genAudioandTitleFromAI(config: ConfigParser, port: int, reGen : bool):
                 continue
 
         # 跳过换行符号
-        script.replace('\\\\','')
+        script = script.replace('\\','')
+        script = replace_command(script, 'audio', 1)
+        print(f'输入TTS的文本为 - {script}')
+        params = {
+            'text': script,
+            'text_language': 'zh',
+            'cut_punc': '。，',
+            'speed' : '1.2'
+        }
 
         # 发送请求
         response = requests.get(url, params=params)
@@ -243,7 +250,7 @@ def genAudioandTitleFromAI(config: ConfigParser, port: int, reGen : bool):
 
 reGen = True
 
-config = ConfigParser('scripts/6e.yaml')
+config = ConfigParser('scripts/23.yaml')
 genPic(config)
 
 genAudioandTitleFromAI(config,port,reGen)
