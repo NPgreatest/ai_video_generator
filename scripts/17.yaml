@@ -1,0 +1,11 @@
+project: test17
+video: 17.mp4
+output: 17.mp4
+bgmusic: FuneralMarch.mp3
+script: 17.txt
+bigtitle: 《码农丁真》
+smalltitle: 什么是防火墙
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999

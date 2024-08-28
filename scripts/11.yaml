@@ -1,0 +1,23 @@
+project: test11
+video: 11.mp4
+output: 11.mp4
+bgmusic: FuneralMarch.mp3
+script: 11.txt
+bigtitle: 《码农丁真》
+smalltitle: 拥塞控制之我在理塘接水
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999
+  - name: 拥塞.png
+    begin: 5
+    end: 10
+    posx: right
+    posy: bottom
+    factor: 0.7
+  - name: 流量.png
+    begin: 11
+    end: 16
+    posx: right
+    posy: bottom
+    factor: 0.7

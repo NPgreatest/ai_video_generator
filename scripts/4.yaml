@@ -1,0 +1,11 @@
+project: test4
+video: 4.mp4
+output: 4.mp4
+bgmusic: FuneralMarch.mp3
+script: 4.txt
+bigtitle: 《码农丁真》
+smalltitle: 堆和栈的区别
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999

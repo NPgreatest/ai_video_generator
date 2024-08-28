@@ -1,0 +1,11 @@
+project: test20e
+video: 20e.mp4
+output: 20e.mp4
+bgmusic: FuneralMarch.mp3
+script: 20e.txt
+bigtitle: Trump BootCamp
+smalltitle: HTTP1.1
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999

@@ -1,0 +1,11 @@
+project: test23
+video: 23.mp4
+output: 23.mp4
+bgmusic: FuneralMarch.mp3
+script: 23.txt
+bigtitle: 《码农丁真》
+smalltitle: MySQL的主键
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999

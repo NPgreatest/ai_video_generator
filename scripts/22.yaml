@@ -1,0 +1,17 @@
+project: test22
+video: 22.mp4
+output: 22.mp4
+bgmusic: FuneralMarch.mp3
+script: 22.txt
+bigtitle: ¡¶ÂëÅ©¶¡Õæ¡·
+smalltitle: HTTP3.0-QUIC
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999
+  - name: http123.jpg
+    begin: 17
+    end: 27
+    posx: right
+    posy: bottom
+    factor: 1.2

@@ -1,0 +1,11 @@
+project: test1e
+video: 1.mp4
+output: 1e.mp4
+bgmusic: FuneralMarch.mp3
+script: 1e.txt
+bigtitle: Trump Coding
+smalltitle: Processes and Threads
+bgpic:
+  - name: trump.png
+    begin: 0
+    end: 999

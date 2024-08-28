@@ -1,0 +1,17 @@
+project: test6e
+video: 6.mp4
+output: 6e.mp4
+bgmusic: FuneralMarch.mp3
+script: 6e.txt
+bigtitle: Trump Coding
+smalltitle: DeadLock
+bgpic:
+  - name: trump.png
+    begin: 0
+    end: 999
+  - name: lock.png
+    begin: 5
+    end: 13
+    posx: right
+    posy: bottom
+    factor: 1.5

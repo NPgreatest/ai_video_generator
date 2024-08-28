@@ -1,0 +1,11 @@
+project: test12
+video: gta.mp4
+output: 12.mp4
+bgmusic: FuneralMarch.mp3
+script: 12.txt
+bigtitle: 《码农丁真》
+smalltitle: TCP-连接时需要你情我愿
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999

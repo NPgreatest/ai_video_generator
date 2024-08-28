@@ -1,0 +1,17 @@
+project: test16
+video: 16.mp4
+output: 16.mp4
+bgmusic: FuneralMarch.mp3
+script: 16.txt
+bigtitle: 《码农丁真》
+smalltitle: 什么是端口号
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999
+  - name: osi-model-7-layers.jpg
+    begin: 10
+    end: 16
+    posx: right
+    posy: bottom
+    factor: 1.6

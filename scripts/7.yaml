@@ -1,0 +1,16 @@
+project: test7
+video: 7.mp4
+output: 7.mp4
+bgmusic: FuneralMarch.mp3
+script: 7.txt
+bigtitle: 《一页丁真》
+smalltitle: 鉴定为-分页与分段
+bgpic:
+  - name: dingzhen.png
+    begin: 0
+    end: 999
+  # - name: lock.png
+  #   begin: 6
+  #   end: 13
+  #   posx: right
+  #   posy: bottom

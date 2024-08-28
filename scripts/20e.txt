@@ -1,0 +1,23 @@
+Introduction of HTTP/1.1
+1.Simple
+It consists of only \\header + body
+And HTTP/1.1 is stateless
+Each request is independent \\and does not rely on \\previous requests
+2.Flexible and Extensible
+Because various methods \\and fields in the protocol \\can be flexibly expanded
+And the content under the \\application layer \\can be freely modified
+2.Persistent Connection \\(keep-alive)
+HTTP/1.1, based on TCP, \\achieves persistent connections
+After sending a message, \\it doesn’t immediately disconnect
+Instead, it keeps the connection \\to avoid needing to send \\messages later
+3.Pipelined Network \\Transmission
+The client can \\send multiple requests \\without waiting for a reply
+This can reduce \\the overall response time
+However, the server \\must send responses
+to these pipelined requests \\in the order they were received
+So this can cause \\head-of-line blocking issues
+4.Insecure
+Because HTTP/1.1 \\does not natively support \\the HTTPS protocol
+All content is \\transmitted in plaintext
+/music loser.mp3
+Shut up Joe

@@ -1,0 +1,24 @@
+What is a deadlock?
+A deadlock occurs \\when processes 
+wait for others \\resources
+which may never \\be released 
+unless an external \\action intervenes.
+Such as kill the \\process.
+In interviews
+you might be asked to \\write a deadlock example
+Using Python we can \\easily aced it.
+Define two threads and \\two locks. 
+Each thread grabs one \\lock and attempts to \\grab the other
+which leads to deadlock \\because each lock 
+is held by the other \\thread. 
+Thus, neither \\can proceed.
+This scenario is a case of \\circular waiting for
+resources that can't be \\released.
+Furthurmore, you can \\talk about
+These four deadlock \\conditions:
+1. Mutual exclusion
+2. Hold and wait
+3. No preemption
+4. Circular wait
+/music loser.mp3
+Shut up Joe
