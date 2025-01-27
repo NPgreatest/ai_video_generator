@@ -21,7 +21,7 @@ def read_txt_to_list(file_path):
     :param file_path: str, TXT文件的完整路径
     :return: list, 包含文件每行内容的列表
     """
-    file_path = 'scripts/' + file_path
+    file_path = 'script_example/' + file_path
     content_list = []
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -250,7 +250,7 @@ def genAudioandTitleFromAI(config: ConfigParser, port: int, reGen : bool):
 
 reGen = True
 
-config = ConfigParser('scripts/23.yaml')
+config = ConfigParser('script_example/23.yaml')
 genPic(config)
 
 genAudioandTitleFromAI(config,port,reGen)
