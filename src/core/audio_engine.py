@@ -1,3 +1,4 @@
+import json
 import os
 import requests
 
@@ -7,6 +8,7 @@ class WAVDownloader:
         self.project_name = project_name
         self.output_dir = os.path.join("outputs", project_name)
         os.makedirs(self.output_dir, exist_ok=True)
+        self.audio_clips = []
 
     def process_lines(self):
         """Reads the .txt file line by line and processes each line."""
@@ -16,6 +18,7 @@ class WAVDownloader:
                     text = line.strip()
                     if text:
                         self.call_api_and_save_wav(text, i)
+            self.generate_config_json()
         except Exception as e:
             print(f"Error reading the file: {e}")
 
@@ -34,8 +37,30 @@ class WAVDownloader:
             with open(output_path, 'wb') as wav_file:
                 wav_file.write(wav_data)
             print(f"Saved: {output_path}")
+
+            # Append metadata to the audio_clips list
+            self.audio_clips.append({
+                "source": f"{number}.wav",
+                "start": (number - 1) * 10.0,  # Example: Adjust start time based on line number
+                "end": number * 10.0,  # Example: Each audio is assumed to be 10 seconds
+                "volume": 1.0,
+                "audio_start": 0.0
+            })
         except requests.exceptions.RequestException as e:
             print(f"API call failed for line {number}: {e}")
         except Exception as e:
             print(f"Failed to save WAV file for line {number}: {e}")
+
+    def generate_config_json(self):
+        """Generates a JSON configuration file based on the generated WAV files."""
+        config = {
+            "audio_tracks": self.audio_clips
+        }
+        config_path = os.path.join(self.output_dir, "config_example.json")
+        try:
+            with open(config_path, 'w', encoding='utf-8') as json_file:
+                json.dump(config, json_file, indent=2, ensure_ascii=False)
+            print(f"Configuration JSON saved at: {config_path}")
+        except Exception as e:
+            print(f"Failed to save configuration JSON: {e}")
 
